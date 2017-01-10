@@ -1,28 +1,16 @@
 package io.bootique.rabbitmq.client;
 
 import com.google.inject.Binder;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
 import io.bootique.BQCoreModule;
 import io.bootique.ConfigModule;
 import io.bootique.application.OptionMetadata;
-import io.bootique.config.ConfigurationFactory;
-import io.bootique.log.BootLogger;
 import io.bootique.rabbitmq.client.command.SendCommand;
-import io.bootique.rabbitmq.client.connection.ConnectionConfig;
-import io.bootique.shutdown.ShutdownManager;
+import io.bootique.rabbitmq.client.option.RabbitMQCmdOption;
 
-import java.util.logging.Level;
-
-public class RabbitMQModule extends ConfigModule {
+public class RabbitMQCmdModule extends ConfigModule {
 
     @Override
     public void configure(Binder binder) {
-        // turn off chatty logs by default
-        BQCoreModule.contributeLogLevels(binder)
-                .addBinding(ConnectionConfig.class.getName())
-                .toInstance(Level.WARNING);
-
         // bind commands
         BQCoreModule.contributeCommands(binder)
                 .addBinding()
@@ -30,27 +18,27 @@ public class RabbitMQModule extends ConfigModule {
 
         // bind options
         OptionMetadata connectionOption = OptionMetadata
-                .builder("connection", "Choose connection")
+                .builder(RabbitMQCmdOption.CONNECTION.getName(), RabbitMQCmdOption.CONNECTION.getDescription())
                 .valueRequired()
                 .build();
 
         OptionMetadata exchangeOption = OptionMetadata
-                .builder("exchange", "Choose exchange point")
+                .builder(RabbitMQCmdOption.EXCHANGE.getName(), RabbitMQCmdOption.EXCHANGE.getDescription())
                 .valueRequired()
                 .build();
 
         OptionMetadata queueOption = OptionMetadata
-                .builder("queue", "Choose queue")
+                .builder(RabbitMQCmdOption.QUEUE.getName(), RabbitMQCmdOption.QUEUE.getDescription())
                 .valueOptional()
                 .build();
 
         OptionMetadata routingKeyOption = OptionMetadata
-                .builder("key", "Routing key")
+                .builder(RabbitMQCmdOption.ROUTING_KEY.getName(), RabbitMQCmdOption.ROUTING_KEY.getDescription())
                 .valueRequired()
                 .build();
 
         OptionMetadata messageOption = OptionMetadata
-                .builder("message", "Message to send")
+                .builder(RabbitMQCmdOption.MESSAGE.getName(), RabbitMQCmdOption.MESSAGE.getDescription())
                 .valueOptional()
                 .build();
 
@@ -59,16 +47,5 @@ public class RabbitMQModule extends ConfigModule {
         BQCoreModule.contributeOptions(binder).addBinding().toInstance(queueOption);
         BQCoreModule.contributeOptions(binder).addBinding().toInstance(routingKeyOption);
         BQCoreModule.contributeOptions(binder).addBinding().toInstance(messageOption);
-    }
-
-    @Provides
-    @Singleton
-    RabbitMQSettings provideSettings(ConfigurationFactory configurationFactory,
-                                     BootLogger bootLogger,
-                                     ShutdownManager shutdownManager) {
-        RabbitMQFactory rabbitMQFactory = configurationFactory.config(RabbitMQFactory.class, configPrefix);
-
-        return new RabbitMQSettings(rabbitMQFactory.createConnectionFactory(bootLogger, shutdownManager),
-                rabbitMQFactory.createChannelFactory());
     }
 }

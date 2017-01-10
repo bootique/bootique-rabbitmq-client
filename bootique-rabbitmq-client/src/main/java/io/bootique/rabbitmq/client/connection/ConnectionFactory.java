@@ -28,7 +28,7 @@ public class ConnectionFactory {
         return connectionList.computeIfAbsent(connectionName, this::createConnection);
     }
 
-    protected Connection createConnection(String connectionName) {
+    private Connection createConnection(String connectionName) {
         return configMap.computeIfAbsent(connectionName, name -> {
             throw new IllegalStateException("No configuration present for Connection named '" + name + "'");
         }).createConnection();

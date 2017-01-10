@@ -5,7 +5,7 @@ import io.bootique.Bootique;
 public class Application implements Module {
 
     public static void main(String[] args) {
-        Bootique.app("--config=classpath:config.yml")
+        Bootique.app("--config=classpath:config.yml", "--send", "-Cconn1", "-Eexch1", "-Qqueue1", "-Kroute", "-M\"Hello, world!\"")
                 .args(args)
                 .autoLoadModules()
                 .module(Application.class)

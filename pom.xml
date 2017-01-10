@@ -11,18 +11,19 @@
         <version>0.6</version>
     </parent>
 
-    <groupId>io.bootique.rabbitmqclient</groupId>
-    <artifactId>bootique-rabbitmqclient-parent</artifactId>
+    <groupId>io.bootique.rabbitmq-client</groupId>
+    <artifactId>bootique-rabbitmq-client-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
 
-    <name>bootique-rabbitmqclient-parent</name>
+    <name>bootique-rabbitmq-client-parent</name>
     <description>
         Parent POM of Bootique RabbitMQ module.
     </description>
 
     <modules>
-        <module>bootique-rabbitmqclient</module>
-        <module>bootique-rabbitmqclient-example</module>
+        <module>bootique-rabbitmq-client</module>
+        <module>bootique-rabbitmq-client-example</module>
+        <module>bootique-rabbitmq-client-cmd</module>
     </modules>
 
     <properties>

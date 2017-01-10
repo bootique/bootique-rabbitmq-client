@@ -8,7 +8,6 @@ import io.bootique.application.CommandMetadata;
 import io.bootique.cli.Cli;
 import io.bootique.command.CommandOutcome;
 import io.bootique.command.CommandWithMetadata;
-import io.bootique.rabbitmq.client.RabbitMQSettings;
 import io.bootique.rabbitmq.client.channel.ChannelFactory;
 import io.bootique.rabbitmq.client.connection.ConnectionFactory;
 
@@ -16,31 +15,31 @@ import java.io.IOException;
 
 public class SendCommand extends CommandWithMetadata {
 
-    private Provider<RabbitMQSettings> rabbitMQSettingsProvider;
+    private Provider<ConnectionFactory> connectionFactoryProvider;
+    private Provider<ChannelFactory> channelFactoryProvider;
 
     @Inject
-    public SendCommand(Provider<RabbitMQSettings> rabbitMQSettingsProvider) {
+    public SendCommand(Provider<ConnectionFactory> connectionFactoryProvider,
+                       Provider<ChannelFactory> channelFactoryProvider) {
         super(CommandMetadata
                 .builder(SendCommand.class)
                 .description("Send RabbitMQ message.")
                 .build());
 
-        this.rabbitMQSettingsProvider = rabbitMQSettingsProvider;
+        this.connectionFactoryProvider = connectionFactoryProvider;
+        this.channelFactoryProvider = channelFactoryProvider;
     }
 
     @Override
     public CommandOutcome run(Cli cli) {
-        String connectionName = cli.optionString("connection");
-        String exchangeName = cli.optionString("exchange");
-        String queueName = cli.optionString("queue");
-        String routingKey = cli.optionString("key");
-        String message = cli.optionString("message");
+        String connectionName = cli.optionString("C");
+        String exchangeName = cli.optionString("E");
+        String queueName = cli.optionString("Q");
+        String routingKey = cli.optionString("K");
+        String message = cli.optionString("M");
 
-        ConnectionFactory connectionFactory = rabbitMQSettingsProvider.get().getConnectionFactory();
-        ChannelFactory channelFactory = rabbitMQSettingsProvider.get().getChannelFactory();
-
-        Connection connection = connectionFactory.forName(connectionName);
-        Channel channel = channelFactory.openChannel(connection, exchangeName, queueName, routingKey);
+        Connection connection = connectionFactoryProvider.get().forName(connectionName);
+        Channel channel = channelFactoryProvider.get().openChannel(connection, exchangeName, queueName, routingKey);
 
         System.out.println("Chosen: " + connection);
         System.out.println(channel);

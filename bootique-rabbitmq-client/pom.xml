@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>bootique-rabbitmqclient-parent</artifactId>
-        <groupId>io.bootique.rabbitmqclient</groupId>
+        <artifactId>bootique-rabbitmq-client-parent</artifactId>
+        <groupId>io.bootique.rabbitmq-client</groupId>
         <version>0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bootique-rabbitmqclient</artifactId>
+    <artifactId>bootique-rabbitmq-client</artifactId>
     <packaging>jar</packaging>
 
     <name>bootique-rabbitmq-client:RabbitMQ Integration with Bootique</name>
