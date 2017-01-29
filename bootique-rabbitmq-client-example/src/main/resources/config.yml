@@ -1,8 +1,10 @@
 rabbitmq:
   connections:
     conn1:
+      type: "amqp"
       host: "localhost"
     conn2:
+      type: "uri"
       uri: "amqp://rabbit:rabbit@localhost:3333"
   exchanges:
     exch1:

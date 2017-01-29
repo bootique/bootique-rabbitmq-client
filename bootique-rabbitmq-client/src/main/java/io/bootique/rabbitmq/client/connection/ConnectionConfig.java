@@ -1,56 +1,47 @@
 package io.bootique.rabbitmq.client.connection;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.rabbitmq.client.Connection;
+import io.bootique.config.PolymorphicConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeoutException;
 
-public class ConnectionConfig {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+public abstract class ConnectionConfig implements PolymorphicConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionConfig.class);
 
-    private String host;
-    private Integer port;
-    private String virtualHost;
-    private String username;
-    private String password;
-    private String uri;
+    private int requestedChannelMax;
+    private int requestedFrameMax;
+    private int requestedHeartbeat;
+    private int connectionTimeout;
+    private int handshakeTimeout;
+    private int shutdownTimeout;
+
+    private boolean automaticRecoveryEnabled;
+    private boolean topologyRecovery;
+
+    private long networkRecoveryInterval;
+
+    protected abstract com.rabbitmq.client.ConnectionFactory createConnectionFactory();
 
     public Connection createConnection() {
-        com.rabbitmq.client.ConnectionFactory factory = new com.rabbitmq.client.ConnectionFactory();
+        com.rabbitmq.client.ConnectionFactory factory = createConnectionFactory();
 
-        if (uri != null) {
-            try {
-                factory.setUri(uri);
-            } catch (URISyntaxException |
-                    NoSuchAlgorithmException |
-                    KeyManagementException e) {
-                throw new IllegalArgumentException("Config URI syntax is wrong");
-            }
-        } else {
-            if (host != null)
-                factory.setHost(host);
-
-            if (port != null)
-                factory.setPort(port);
-
-            if (virtualHost != null)
-                factory.setVirtualHost(virtualHost);
-
-            if (username != null)
-                factory.setUsername(username);
-
-            if (password != null)
-                factory.setPassword(password);
-        }
+        factory.setRequestedChannelMax(requestedChannelMax);
+        factory.setRequestedFrameMax(requestedFrameMax);
+        factory.setRequestedHeartbeat(requestedHeartbeat);
+        factory.setConnectionTimeout(connectionTimeout);
+        factory.setHandshakeTimeout(handshakeTimeout);
+        factory.setShutdownTimeout(shutdownTimeout);
+        factory.setAutomaticRecoveryEnabled(automaticRecoveryEnabled);
+        factory.setTopologyRecoveryEnabled(topologyRecovery);
+        factory.setNetworkRecoveryInterval(networkRecoveryInterval);
 
         LOGGER.info("Creating RabbitMQ connection.");
-
         try {
             return factory.newConnection();
         } catch (IOException | TimeoutException e) {
@@ -58,27 +49,39 @@ public class ConnectionConfig {
         }
     }
 
-    public void setHost(String host) {
-        this.host = host;
+    public void setRequestedChannelMax(int requestedChannelMax) {
+        this.requestedChannelMax = requestedChannelMax;
     }
 
-    public void setPort(Integer port) {
-        this.port = port;
+    public void setRequestedFrameMax(int requestedFrameMax) {
+        this.requestedFrameMax = requestedFrameMax;
     }
 
-    public void setVirtualHost(String virtualHost) {
-        this.virtualHost = virtualHost;
+    public void setRequestedHeartbeat(int requestedHeartbeat) {
+        this.requestedHeartbeat = requestedHeartbeat;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setConnectionTimeout(int connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHandshakeTimeout(int handshakeTimeout) {
+        this.handshakeTimeout = handshakeTimeout;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setShutdownTimeout(int shutdownTimeout) {
+        this.shutdownTimeout = shutdownTimeout;
+    }
+
+    public void setAutomaticRecoveryEnabled(boolean automaticRecoveryEnabled) {
+        this.automaticRecoveryEnabled = automaticRecoveryEnabled;
+    }
+
+    public void setTopologyRecovery(boolean topologyRecovery) {
+        this.topologyRecovery = topologyRecovery;
+    }
+
+    public void setNetworkRecoveryInterval(long networkRecoveryInterval) {
+        this.networkRecoveryInterval = networkRecoveryInterval;
     }
 }

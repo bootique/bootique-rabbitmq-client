@@ -15,7 +15,7 @@ public class ConnectionFactory {
 
     private Map<String, ConnectionConfig> configMap;
     private final ConcurrentMap<String, Connection> connectionList = new ConcurrentHashMap<>();
-    private volatile Boolean shutdown;
+    private volatile Boolean shutdown = false;
     private final Object lock = new Object();
 
     public ConnectionFactory(Map<String, ConnectionConfig> configMap) {

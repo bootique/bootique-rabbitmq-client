@@ -1,0 +1,3 @@
+io.bootique.rabbitmq.client.connection.ConnectionConfig
+io.bootique.rabbitmq.client.connection.AMQPConnectionConfig
+io.bootique.rabbitmq.client.connection.URIConnectionConfig
