@@ -10,16 +10,21 @@ public class AMQPConnectionConfig extends ConnectionConfig {
     private String password;
     private String virtualHost;
     private String host;
-    private int port;
+    private int port = -1;
 
     @Override
     protected ConnectionFactory createConnectionFactory() {
         ConnectionFactory factory = new ConnectionFactory();
 
-        factory.setUsername(username);
-        factory.setPassword(password);
-        factory.setVirtualHost(virtualHost);
-        factory.setHost(host);
+        if (username != null)
+            factory.setUsername(username);
+        if (password != null)
+            factory.setPassword(password);
+        if (virtualHost != null)
+            factory.setVirtualHost(virtualHost);
+        if (host != null)
+            factory.setHost(host);
+
         factory.setPort(port);
 
         return factory;
