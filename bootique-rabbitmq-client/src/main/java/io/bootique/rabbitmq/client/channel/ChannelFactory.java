@@ -39,7 +39,7 @@ public class ChannelFactory {
 
     private void queueDeclare(Channel channel, String queueName) throws IOException {
         QueueConfig queueConfig = queues.computeIfAbsent(queueName, name -> {
-            throw new IllegalStateException("No configuration present for Exchange named '" + name + "'");
+            throw new IllegalStateException("No configuration present for Queue named '" + name + "'");
         });
 
         queueConfig.queueDeclare(channel, queueName);

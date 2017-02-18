@@ -22,8 +22,6 @@
 
     <modules>
         <module>bootique-rabbitmq-client</module>
-        <module>bootique-rabbitmq-client-example</module>
-        <module>bootique-rabbitmq-client-cmd</module>
     </modules>
 
     <properties>
