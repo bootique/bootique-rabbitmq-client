@@ -2,6 +2,8 @@ package io.bootique.rabbitmq.client.connection;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.rabbitmq.client.Connection;
+import io.bootique.annotation.BQConfig;
+import io.bootique.annotation.BQConfigProperty;
 import io.bootique.config.PolymorphicConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+@BQConfig
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public abstract class ConnectionConfig implements PolymorphicConfiguration {
 
@@ -49,38 +52,47 @@ public abstract class ConnectionConfig implements PolymorphicConfiguration {
         }
     }
 
+    @BQConfigProperty
     public void setRequestedChannelMax(int requestedChannelMax) {
         this.requestedChannelMax = requestedChannelMax;
     }
 
+    @BQConfigProperty
     public void setRequestedFrameMax(int requestedFrameMax) {
         this.requestedFrameMax = requestedFrameMax;
     }
 
+    @BQConfigProperty
     public void setRequestedHeartbeat(int requestedHeartbeat) {
         this.requestedHeartbeat = requestedHeartbeat;
     }
 
+    @BQConfigProperty
     public void setConnectionTimeout(int connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
     }
 
+    @BQConfigProperty
     public void setHandshakeTimeout(int handshakeTimeout) {
         this.handshakeTimeout = handshakeTimeout;
     }
 
+    @BQConfigProperty
     public void setShutdownTimeout(int shutdownTimeout) {
         this.shutdownTimeout = shutdownTimeout;
     }
 
+    @BQConfigProperty
     public void setAutomaticRecoveryEnabled(boolean automaticRecoveryEnabled) {
         this.automaticRecoveryEnabled = automaticRecoveryEnabled;
     }
 
+    @BQConfigProperty
     public void setTopologyRecovery(boolean topologyRecovery) {
         this.topologyRecovery = topologyRecovery;
     }
 
+    @BQConfigProperty
     public void setNetworkRecoveryInterval(long networkRecoveryInterval) {
         this.networkRecoveryInterval = networkRecoveryInterval;
     }

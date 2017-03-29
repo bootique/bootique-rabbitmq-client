@@ -1,5 +1,7 @@
 package io.bootique.rabbitmq.client;
 
+import io.bootique.annotation.BQConfig;
+import io.bootique.annotation.BQConfigProperty;
 import io.bootique.log.BootLogger;
 import io.bootique.rabbitmq.client.channel.ChannelFactory;
 import io.bootique.rabbitmq.client.channel.ExchangeConfig;
@@ -10,6 +12,7 @@ import io.bootique.shutdown.ShutdownManager;
 
 import java.util.Map;
 
+@BQConfig
 public class RabbitMQFactory {
 
     private Map<String, ConnectionConfig> connections;
@@ -30,14 +33,17 @@ public class RabbitMQFactory {
         return new ChannelFactory(exchanges, queues);
     }
 
+    @BQConfigProperty
     public void setConnections(Map<String, ConnectionConfig> connections) {
         this.connections = connections;
     }
 
+    @BQConfigProperty
     public void setExchanges(Map<String, ExchangeConfig> exchanges) {
         this.exchanges = exchanges;
     }
 
+    @BQConfigProperty
     public void setQueues(Map<String, QueueConfig> queues) {
         this.queues = queues;
     }

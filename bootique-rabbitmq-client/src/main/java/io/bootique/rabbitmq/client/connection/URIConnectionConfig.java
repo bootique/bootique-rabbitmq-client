@@ -2,7 +2,10 @@ package io.bootique.rabbitmq.client.connection;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.rabbitmq.client.ConnectionFactory;
+import io.bootique.annotation.BQConfig;
+import io.bootique.annotation.BQConfigProperty;
 
+@BQConfig
 @JsonTypeName("uri")
 public class URIConnectionConfig extends ConnectionConfig {
 
@@ -19,6 +22,7 @@ public class URIConnectionConfig extends ConnectionConfig {
         return factory;
     }
 
+    @BQConfigProperty
     public void setUri(String uri) {
         this.uri = uri;
     }

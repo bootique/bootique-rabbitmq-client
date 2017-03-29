@@ -2,7 +2,10 @@ package io.bootique.rabbitmq.client.connection;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.rabbitmq.client.ConnectionFactory;
+import io.bootique.annotation.BQConfig;
+import io.bootique.annotation.BQConfigProperty;
 
+@BQConfig
 @JsonTypeName("amqp")
 public class AMQPConnectionConfig extends ConnectionConfig {
 
@@ -30,22 +33,27 @@ public class AMQPConnectionConfig extends ConnectionConfig {
         return factory;
     }
 
+    @BQConfigProperty
     public void setUsername(String username) {
         this.username = username;
     }
 
+    @BQConfigProperty
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @BQConfigProperty
     public void setVirtualHost(String virtualHost) {
         this.virtualHost = virtualHost;
     }
 
+    @BQConfigProperty
     public void setHost(String host) {
         this.host = host;
     }
 
+    @BQConfigProperty
     public void setPort(int port) {
         this.port = port;
     }
