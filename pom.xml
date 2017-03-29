@@ -8,10 +8,10 @@
     <parent>
         <groupId>io.bootique.modules.parent</groupId>
         <artifactId>bootique-modules-parent</artifactId>
-        <version>0.6</version>
+        <version>0.7</version>
     </parent>
 
-    <groupId>io.bootique.rabbitmq-client</groupId>
+    <groupId>io.bootique.rabbitmq.client</groupId>
     <artifactId>bootique-rabbitmq-client-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
 
@@ -25,7 +25,7 @@
     </modules>
 
     <properties>
-        <bootique-version>0.20</bootique-version>
+        <bootique-version>0.22-SNAPSHOT</bootique-version>
         <rabbitmq-version>4.0.0</rabbitmq-version>
     </properties>
 
