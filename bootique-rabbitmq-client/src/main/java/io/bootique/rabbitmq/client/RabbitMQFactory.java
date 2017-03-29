@@ -19,7 +19,7 @@ public class RabbitMQFactory {
     public ConnectionFactory createConnectionFactory(BootLogger bootLogger, ShutdownManager shutdownManager) {
         ConnectionFactory factory = new ConnectionFactory(connections);
         shutdownManager.addShutdownHook(() -> {
-            bootLogger.trace(() -> "shutting down ConnectionFactory...");
+            bootLogger.trace(() -> "shutting down RabbitMQ ConnectionFactory...");
             factory.shutdown();
         });
 
