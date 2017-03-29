@@ -10,4 +10,8 @@ public class RabbitMQModuleProviderTest {
         BQModuleProviderChecker.testPresentInJar(RabbitMQModuleProvider.class);
     }
 
+    @Test
+    public void testMetadata() {
+        BQModuleProviderChecker.testMetadata(RabbitMQModuleProvider.class);
+    }
 }

@@ -1,10 +1,10 @@
 package io.bootique.rabbitmq.client.connection;
 
 import com.rabbitmq.client.Connection;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,7 +30,13 @@ public class ConnectionFactory {
             connectionList.values()
                     .stream()
                     .filter(Connection::isOpen)
-                    .forEach(IOUtils::closeQuietly);
+                    .forEach(c -> {
+                        try {
+                            c.close();
+                        } catch (IOException e) {
+                            // ignore...
+                        }
+                    });
             connectionList.clear();
         }
     }

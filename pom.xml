@@ -32,13 +32,6 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.bootique.bom</groupId>
-                <artifactId>bootique-bom</artifactId>
-                <version>${bootique-version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>com.rabbitmq</groupId>
                 <artifactId>amqp-client</artifactId>
                 <version>${rabbitmq-version}</version>
