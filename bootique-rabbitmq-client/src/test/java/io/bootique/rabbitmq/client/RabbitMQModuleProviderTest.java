@@ -14,5 +14,5 @@ public class RabbitMQModuleProviderTest {
     public void testMetadata() {
         BQModuleProviderChecker.testMetadata(RabbitMQModuleProvider.class);
     }
-    
+
 }
