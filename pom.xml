@@ -23,7 +23,7 @@
     </modules>
 
     <properties>
-        <bootique-version>0.22</bootique-version>
+        <bootique-version>0.23</bootique-version>
         <rabbitmq-version>4.0.0</rabbitmq-version>
     </properties>
 
