@@ -15,10 +15,17 @@ public class ChannelFactory {
         this.queues = queues;
     }
 
+    /**
+     * TODO: Comment what this method should do (and actually do)
+     */
     public Channel openChannel(Connection connection, String exchangeName, String routingKey) {
         return openChannel(connection, exchangeName, null, routingKey);
     }
 
+    /**
+     * TODO: Comment what this method should do (and actually do)
+     * Create channel and bind queue to exchange.
+     */
     public Channel openChannel(Connection connection, String exchangeName, String queueName, String routingKey) {
         try {
             Channel channel = connection.createChannel();
@@ -30,7 +37,7 @@ public class ChannelFactory {
                 queueDeclare(channel, queueName);
             }
 
-            channel.exchangeBind(queueName, exchangeName, routingKey);
+            channel.queueBind(queueName, exchangeName, routingKey);
             return  channel;
         } catch (IOException e) {
             throw new RuntimeException(e);

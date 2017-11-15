@@ -1,0 +1,25 @@
+rabbitmq:
+  connections:
+    bqConnection:
+      type: 'amqp'
+      automaticRecoveryEnabled: true
+      connectionTimeout: 60000
+      handshakeTimeout: 60000
+      host: localhost
+      password: guest
+      port: 5672
+      username: guest
+      virtualHost: /
+  exchanges:
+   bqExchange:
+     autoDelete: false
+     durable: true
+     internal: true
+     type: TOPIC
+  queues:
+   bqQueue:
+     autoDelete: true
+     durable: true
+     exclusive: false
+
+
