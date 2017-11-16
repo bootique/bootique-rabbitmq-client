@@ -14,14 +14,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.output.WaitingConsumer;
+import org.testcontainers.containers.wait.LogMessageWaitStrategy;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
-import static org.testcontainers.containers.output.OutputFrame.OutputType.STDOUT;
 
 /**
  * Runs RabbitMQ and tests against real RMQ instance.
@@ -35,7 +33,8 @@ public class RabbitMQNamingIT {
 
     @ClassRule
     public static GenericContainer rabbit = new GenericContainer("rabbitmq:3.6-alpine")
-            .withExposedPorts(5672);
+            .withExposedPorts(5672)
+            .waitingFor(new LogMessageWaitStrategy().withRegEx(".*Server startup complete.*\\s"));
 
     @Test
     public void test() throws IOException, TimeoutException {
@@ -55,15 +54,7 @@ public class RabbitMQNamingIT {
                 .autoLoadModules()
                 .createRuntime();
 
-        waitForRabbit(rabbit);
-
         runtime.getInstance(RabbitMqUI.class).init();
-    }
-
-    private static void waitForRabbit(GenericContainer container) throws TimeoutException {
-        WaitingConsumer consumer = new WaitingConsumer();
-        container.followOutput(consumer, STDOUT);
-        consumer.waitUntil(frame -> frame.getUtf8String().contains("Server startup complete"), 30, TimeUnit.SECONDS);
     }
 }
 
