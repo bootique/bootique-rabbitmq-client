@@ -31,7 +31,7 @@ public abstract class ConnectionConfig implements PolymorphicConfiguration {
 
     protected abstract com.rabbitmq.client.ConnectionFactory createConnectionFactory();
 
-    public Connection createConnection() {
+    public Connection createConnection(String connectionName) {
         com.rabbitmq.client.ConnectionFactory factory = createConnectionFactory();
 
         factory.setRequestedChannelMax(requestedChannelMax);
@@ -48,7 +48,7 @@ public abstract class ConnectionConfig implements PolymorphicConfiguration {
         try {
             return factory.newConnection();
         } catch (IOException | TimeoutException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(String.format("Can't create connection \"%s\".", connectionName) , e);
         }
     }
 
@@ -67,17 +67,17 @@ public abstract class ConnectionConfig implements PolymorphicConfiguration {
         this.requestedHeartbeat = requestedHeartbeat;
     }
 
-    @BQConfigProperty
+    @BQConfigProperty("Connection timeout in milliseconds.")
     public void setConnectionTimeout(int connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
     }
 
-    @BQConfigProperty
+    @BQConfigProperty("Handshake timeout in milliseconds.")
     public void setHandshakeTimeout(int handshakeTimeout) {
         this.handshakeTimeout = handshakeTimeout;
     }
 
-    @BQConfigProperty
+    @BQConfigProperty("Shutdown timeout in milliseconds.")
     public void setShutdownTimeout(int shutdownTimeout) {
         this.shutdownTimeout = shutdownTimeout;
     }

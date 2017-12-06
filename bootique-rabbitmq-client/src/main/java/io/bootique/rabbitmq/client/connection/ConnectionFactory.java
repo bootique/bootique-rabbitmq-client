@@ -25,7 +25,7 @@ public class ConnectionFactory {
         // presumably RabbitMQ connections are thread-safe and we can reuse them for parallel calls
         // https://www.rabbitmq.com/api-guide.html
 
-        // so just create a fixed-sisze self-inflating cache of connections by name
+        // so just create a fixed-size self-inflating cache of connections by name
         configMap.keySet().forEach(name -> connections.put(name, new AtomicReference<>()));
     }
 
@@ -94,6 +94,6 @@ public class ConnectionFactory {
 
         return configMap.computeIfAbsent(connectionName, name -> {
             throw new IllegalStateException("No configuration present for Connection named '" + name + "'");
-        }).createConnection();
+        }).createConnection(connectionName);
     }
 }
