@@ -6,8 +6,8 @@ import org.junit.Test;
 public class RabbitMQModuleProviderTest {
 
     @Test
-    public void testPresentInJar() {
-        BQModuleProviderChecker.testPresentInJar(RabbitMQModuleProvider.class);
+    public void testAutoLoadable() {
+        BQModuleProviderChecker.testAutoLoadable(RabbitMQModuleProvider.class);
     }
 
     @Test
