@@ -19,13 +19,13 @@
         <dependency>
             <groupId>io.bootique</groupId>
             <artifactId>bootique</artifactId>
-            <version>${bootique-version}</version>
+            <version>${bootique.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.rabbitmq</groupId>
             <artifactId>amqp-client</artifactId>
-            <version>${rabbitmq-version}</version>
+            <version>${rabbitmq.version}</version>
             <scope>compile</scope>
         </dependency>
 
