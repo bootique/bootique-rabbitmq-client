@@ -43,7 +43,7 @@
 
     <properties>
         <bootique.version>${project.version}</bootique.version>
-        <rabbitmq.version>5.0.0</rabbitmq.version>
+        <rabbitmq.version>5.4.3</rabbitmq.version>
     </properties>
 
     <scm>
