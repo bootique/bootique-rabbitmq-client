@@ -30,7 +30,7 @@
 
     <groupId>io.bootique.rabbitmq.client</groupId>
     <artifactId>bootique-rabbitmq-client-parent</artifactId>
-    <version>1.0.RC2-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
 
     <name>bootique-rabbitmq-client-parent</name>
     <description>
