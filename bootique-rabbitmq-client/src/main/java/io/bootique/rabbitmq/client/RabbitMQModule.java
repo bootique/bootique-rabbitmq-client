@@ -37,8 +37,8 @@ public class RabbitMQModule extends ConfigModule {
 
     @Provides
     @Singleton
-    RabbitMQFactory provideRabbitMQFactory(ConfigurationFactory configurationFactory) {
-        return configurationFactory.config(RabbitMQFactory.class, configPrefix);
+    RabbitMQFactory provideRabbitMQFactory(ConfigurationFactory configFactory) {
+        return config(RabbitMQFactory.class, configFactory);
     }
 
     @Provides
