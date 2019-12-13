@@ -19,7 +19,6 @@
 
 package io.bootique.rabbitmq.client.integration;
 
-import com.google.inject.Inject;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.GetResponse;
@@ -37,6 +36,8 @@ import org.testcontainers.containers.wait.LogMessageWaitStrategy;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+
+import javax.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 
