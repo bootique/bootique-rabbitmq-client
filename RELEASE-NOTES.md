@@ -1,3 +1,7 @@
+## 2.0
+
+* #9 Upgrade to the latest amqp-client
+
 ## 0.25
 
 * #1 Exception when using ChannelFactory.openChannel()
