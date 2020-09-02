@@ -23,6 +23,6 @@
 # Bootique RabbitMQ client
 Provides RabbitMQ integration with [Bootique](http://bootique.io)
 
-**WARNING: Since Bootique 2.0 RabbitMQ client integration is moved to ["bootique-rabbitmq" project](https://github.com/bootique/bootique-rabbitmq). This project exists only for Bootique 1.x support.**
+**Deprecation Note: Since Bootique 2.0 RabbitMQ client integration is moved to ["bootique-rabbitmq" project](https://github.com/bootique/bootique-rabbitmq). This project exists only for Bootique 1.x support.**
 
 
