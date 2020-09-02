@@ -20,8 +20,9 @@
 [![Build Status](https://travis-ci.org/bootique/bootique-rabbitmq-client.svg)](https://travis-ci.org/bootique/bootique-rabbitmq-client)
 [![Maven Central](https://img.shields.io/maven-central/v/io.bootique.rabbitmq.client/bootique-rabbitmq-client.svg?colorB=brightgreen)](https://search.maven.org/artifact/io.bootique.rabbitmq.client/bootique-rabbitmq-client/)
 
-**WARNING: Since 2.0 RabbitMQ client integration is developed in "bootique-rabbitmq" project. This project is only 
-for 1.x support.**
-
 # Bootique RabbitMQ client
 Provides RabbitMQ integration with [Bootique](http://bootique.io)
+
+**WARNING: Since Bootique 2.0 RabbitMQ client integration is moved to ["bootique-rabbitmq" project](https://github.com/bootique/bootique-rabbitmq). This project exists only for Bootique 1.x support.**
+
+
