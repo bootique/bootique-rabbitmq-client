@@ -17,7 +17,6 @@
   under the License.
   -->
 
-[![Build Status](https://travis-ci.org/bootique/bootique-rabbitmq-client.svg)](https://travis-ci.org/bootique/bootique-rabbitmq-client)
 [![Maven Central](https://img.shields.io/maven-central/v/io.bootique.rabbitmq.client/bootique-rabbitmq-client.svg?colorB=brightgreen)](https://search.maven.org/artifact/io.bootique.rabbitmq.client/bootique-rabbitmq-client/)
 
 # Bootique RabbitMQ client
